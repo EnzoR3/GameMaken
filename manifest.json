@@ -1,10 +1,10 @@
 {
-  "name": "De Beste Game Van De Klas",
-  "short_name": "Game",
+  "name": "Game van David en Enzo",
+  "short_name": "Space Survival",
   "icons": [{
-    "src": "icon-512x512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+    "src": "astro-1.png"
+    
+      
     }],
   "start_url": "index.html",
   "display": "fullscreen"

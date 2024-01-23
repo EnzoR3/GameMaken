@@ -12,6 +12,7 @@
 ///<reference path="p5.global-mode.d.ts" />
 "use strict"
 
+
 /* ********************************************* */
 /* globale variabelen die je gebruikt in je game */
 /* ********************************************* */
@@ -55,6 +56,7 @@ var verwerkBotsing = function() {
  * Tekent spelscherm
  */
 var tekenAlles = function() {
+
   // achtergrond
 
   // vijand
@@ -62,10 +64,12 @@ var tekenAlles = function() {
   // kogel
 
   // speler
-  fill("white");
-  rect(spelerX - 25, spelerY - 25, 50, 50);
-  fill("black");
-  ellipse(spelerX, spelerY, 10, 10);
+
+
+  /*var element = document.getElementById("astro2").src = "astro-2";
+  element = document.getElementById("astro2");
+
+  (spelerX - 25, spelerY - 25, 50, 50);*/
 
   // punten en health
 
@@ -94,8 +98,7 @@ function setup() {
   createCanvas(1280, 720);
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('blue');
-}
+  background('black');
 
 /**
  * draw
