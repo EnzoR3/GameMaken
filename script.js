@@ -1,3 +1,4 @@
+
 /* Game opdracht
    Informatica - Emmauscollege Rotterdam
    Template voor een game in JavaScript met de p5 library
@@ -23,6 +24,28 @@ var spelStatus = SPELEN;
 var spelerX = 600; // x-positie van speler
 var spelerY = 600; // y-positie van speler
 
+var img1;
+var img2;
+var img3;
+var img4;
+var img5;
+var img6;
+
+const ARROW_RIGHT = 39;
+const ARROW_LEFT = 37;
+const ARROW_UP = 38;
+const ARROW_DOWN = 40;
+const CTRL = 17;
+
+const SPACE = 32;
+
+const tilemap = new ex.TileMap({
+  rows: 2,
+  columns: 3,
+  tileWidth: 32,
+  tileHeight: 32,
+});
+
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -32,11 +55,35 @@ var spelerY = 600; // y-positie van speler
  */
 var beweegAlles = function() {
   // speler
+  if(keyIsDown(ARROW_LEFT)) {
+    spelerX = spelerX -1;
+  }
+
+  if (keyIsDown(ARROW_RIGHT)) {
+    spelerX = spelerX +1;
+  }
+
+  if (keyIsDown(SPACE)) {
+    spelerY = spelerY -10;
+    setTimeout(() => spelerY = spelerY +10, 500); 
+  }
+
+  if (keyIsDown(CTRL)) {
+    if (keyIsDown (ARROW_LEFT)) {
+      spelerX = spelerX -2;
+    }
+    else if (keyIsDown(ARROW_RIGHT)) {
+      spelerX = spelerX +2;
+    }
+  }
+
+  fill('blue');
+  rect(0, 0, 1280, 720);
 
   // vijand
 
   // kogel
-};
+}
 
 /**
  * Checkt botsingen
@@ -64,14 +111,8 @@ var tekenAlles = function() {
   // kogel
 
   // speler
-  fill("white");
-  rect(spelerX - 25, spelerY - 25, 50, 50)
 
-
-  /*var element = document.getElementById("astro2").src = "astro-2";
-  element = document.getElementById("astro2");
-
-  (spelerX - 25, spelerY - 25, 50, 50);*/
+image(img1, spelerX-50, spelerY-50, 100, 100);
 
   // punten en health
 
@@ -90,6 +131,20 @@ var checkGameOver = function() {
 /* setup() en draw() functies / hoofdprogramma   */
 /* ********************************************* */
 
+/* Preload gebeurt voordat alle andere commands runnen,
+en voordat het visuele gedeelte van de game het doet.
+*/
+
+function preload() {
+  img1 = loadImage('afbeeldingen/astro-1.png');
+  img2 = loadImage('afbeeldingen/astro-2.png');
+  img3 = loadImage('afbeeldingen/astro-3.png');
+  img4 = loadImage('afbeeldingen/astro-4.png');
+  img5 = loadImage('afbeeldingen/astro-5.png');
+  img6 = loadImage('afbeeldingen/astro-6.png');
+}
+
+
 /**
  * setup
  * de code in deze functie wordt één keer uitgevoerd door
@@ -100,7 +155,7 @@ function setup() {
   createCanvas(1280, 720);
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('black');
+  background('blue');
 }
 /**
  * draw
