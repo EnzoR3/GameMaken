@@ -64,6 +64,8 @@ var tekenAlles = function() {
   // kogel
 
   // speler
+  fill("white");
+  rect(spelerX - 25, spelerY - 25, 50, 50)
 
 
   /*var element = document.getElementById("astro2").src = "astro-2";
@@ -99,7 +101,7 @@ function setup() {
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
   background('black');
-
+}
 /**
  * draw
  * de code in deze functie wordt 50 keer per seconde
