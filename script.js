@@ -22,7 +22,7 @@ const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
 var spelerX = 600; // x-positie van speler
-var spelerY = 600; // y-positie van speler
+var spelerY = 640; // y-positie van speler
 
 var img1;
 var img2;
@@ -30,6 +30,8 @@ var img3;
 var img4;
 var img5;
 var img6;
+
+var img7;
 
 var spelerImg;
 
@@ -109,6 +111,11 @@ var tekenAlles = function() {
 
   // achtergrond
 
+  image(img7,  50, 640);
+  
+  fill('black');
+  rect(0, 670, 1280, 50);
+
   // vijand
 
   // kogel
@@ -145,6 +152,7 @@ function preload() {
   img4 = loadImage('afbeeldingen/astro-4.png');
   img5 = loadImage('afbeeldingen/astro-5.png');
   img6 = loadImage('afbeeldingen/astro-6.png');
+  img7 = loadImage('afbeeldingen/House-lvl1.png');
   spelerImg = img1;
 }
 
