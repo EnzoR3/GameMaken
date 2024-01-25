@@ -31,20 +31,15 @@ var img4;
 var img5;
 var img6;
 
-const ARROW_RIGHT = 39;
-const ARROW_LEFT = 37;
+var spelerImg;
+
+const ARROW_LEFT = 39;
+const ARROW_RIGHT = 37;
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
 const CTRL = 17;
 
 const SPACE = 32;
-
-const tilemap = new ex.TileMap({
-  rows: 2,
-  columns: 3,
-  tileWidth: 32,
-  tileHeight: 32,
-});
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -56,24 +51,32 @@ const tilemap = new ex.TileMap({
 var beweegAlles = function() {
   // speler
   if(keyIsDown(ARROW_LEFT)) {
-    spelerX = spelerX -1;
+    spelerX = spelerX +1;
+    spelerImg = img1;
   }
 
   if (keyIsDown(ARROW_RIGHT)) {
-    spelerX = spelerX +1;
+    spelerX = spelerX -1;
+    spelerImg = img3;
   }
 
   if (keyIsDown(SPACE)) {
+    if (keyIsDown(ARROW_RIGHT)) {
     spelerY = spelerY -10;
     setTimeout(() => spelerY = spelerY +10, 500); 
+  }
+    else {
+    spelerY = spelerY -10;
+    setTimeout(() => spelerY = spelerY +10, 500); 
+    }
   }
 
   if (keyIsDown(CTRL)) {
     if (keyIsDown (ARROW_LEFT)) {
-      spelerX = spelerX -2;
+      spelerX = spelerX +2;
     }
     else if (keyIsDown(ARROW_RIGHT)) {
-      spelerX = spelerX +2;
+      spelerX = spelerX -2;
     }
   }
 
@@ -112,7 +115,7 @@ var tekenAlles = function() {
 
   // speler
 
-image(img1, spelerX-50, spelerY-50, 100, 100);
+image(spelerImg, spelerX-50, spelerY-50, 100, 100);
 
   // punten en health
 
@@ -142,6 +145,7 @@ function preload() {
   img4 = loadImage('afbeeldingen/astro-4.png');
   img5 = loadImage('afbeeldingen/astro-5.png');
   img6 = loadImage('afbeeldingen/astro-6.png');
+  spelerImg = img1;
 }
 
 
