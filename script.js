@@ -111,7 +111,7 @@ var tekenAlles = function() {
 
   // achtergrond
 
-  image(img7,  50, 640);
+  image(img7,  50, 380, 400,500);
   
   fill('black');
   rect(0, 670, 1280, 50);
