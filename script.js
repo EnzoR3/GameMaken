@@ -39,7 +39,7 @@ const ARROW_LEFT = 39;
 const ARROW_RIGHT = 37;
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
-const CTRL = 17;
+const SHIFT = 16;
 
 const SPACE = 32;
 
@@ -53,32 +53,53 @@ const SPACE = 32;
 var beweegAlles = function() {
   // speler
   if(keyIsDown(ARROW_LEFT)) {
-    spelerX = spelerX +1;
+    spelerX = spelerX +4;
     spelerImg = img1;
   }
 
   if (keyIsDown(ARROW_RIGHT)) {
-    spelerX = spelerX -1;
+    spelerX = spelerX -4;
     spelerImg = img3;
   }
 
-  if (keyIsDown(SPACE)) {
-    if (keyIsDown(ARROW_RIGHT)) {
-    spelerY = spelerY -10;
-    setTimeout(() => spelerY = spelerY +10, 500); 
-  }
-    else {
-    spelerY = spelerY -10;
-    setTimeout(() => spelerY = spelerY +10, 500); 
-    }
-  }
+  
 
-  if (keyIsDown(CTRL)) {
+  if (keyIsDown(SPACE)) {
+      if (keyIsDown(ARROW_RIGHT)) {
+          spelerY -= 10;
+          setTimeout(() => {
+              spelerY += 10;
+              spelerY= 640
+          }, 500);
+      } else {
+          spelerY -= 10;
+          setTimeout(() => {
+              spelerY += 10;
+              spelerY= 640
+          }, 500);
+      }
+  
+     
+      
+  }
+    
+
+ 
+
+
+  
+
+
+ 
+
+    
+
+ if (keyIsDown(SHIFT)) {
     if (keyIsDown (ARROW_LEFT)) {
-      spelerX = spelerX +2;
+      spelerX = spelerX +14;
     }
     else if (keyIsDown(ARROW_RIGHT)) {
-      spelerX = spelerX -2;
+      spelerX = spelerX -14;
     }
   }
 
