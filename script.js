@@ -74,28 +74,36 @@ var beweegAlles = function() {
     }
   }
 
-  if (keyIsDown(SPACE)) {
-    if (keyIsDown(ARROW_RIGHT)) {
-        spelerY -= 30;
-        setTimeout(() => {
-            MoveTo(640, 30);
-        }, 600);
-    } else {
-        spelerY -= 30;
-        setTimeout(() => {
-            MoveTo(640, 30);
-        }, 600);
-    }
-  }
+  const grond = 640;
+  
+  function MoveTo(targetY, increment) {
+    while (spelerY < targetY) {
+      spelerY += increment;
 
- function MoveTo(targetY, increment) {
-    if (spelerY < targetY) {
-        spelerY += increment;
-        setTimeout(() => {
-            MoveTo(targetY, increment);
-        }, 2000); 
+        if (spelerY > grond) {
+            setTimeout (() => {
+            spelerY = grond;
+            }, 300);
+            
+        }
+         
+      }
+  }
+  if (keyIsDown(SPACE)) {
+     spelerY -= 20;
+     
+     if (spelerY < grond) {
+     setTimeout (() => {
+      MoveTo(grond, 1);
+    }, 250);
     }
   }
+   
+  
+
+  
+
+ 
     
  
    
