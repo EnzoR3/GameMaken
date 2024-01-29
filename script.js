@@ -21,7 +21,7 @@ const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
-var spelerX = 600; // x-positie van speler
+var spelerX = 640; // x-positie van speler
 var spelerY = 640; // y-positie van speler
 
 var img1;
@@ -43,6 +43,7 @@ const SHIFT = 16;
 
 const SPACE = 32;
 
+
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -51,66 +52,62 @@ const SPACE = 32;
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
 var beweegAlles = function() {
+ 
   // speler
   if(keyIsDown(ARROW_LEFT)) {
-    spelerX = spelerX +4;
+    spelerX = spelerX +13;
     spelerImg = img1;
   }
 
   if (keyIsDown(ARROW_RIGHT)) {
-    spelerX = spelerX -4;
+    spelerX = spelerX -13;
     spelerImg = img3;
   }
 
-  
+  if (keyIsDown(SHIFT)) {
+    if (keyIsDown (ARROW_LEFT)) {
+      spelerX = spelerX +6;
+    }
+    
+    if (keyIsDown(ARROW_RIGHT)) {
+      spelerX = spelerX -6;
+    }
+  }
 
   if (keyIsDown(SPACE)) {
-      if (keyIsDown(ARROW_RIGHT)) {
-          spelerY -= 10;
-          setTimeout(() => {
-              spelerY += 10;
-              spelerY= 640
-          }, 500);
-      } else {
-          spelerY -= 10;
-          setTimeout(() => {
-              spelerY += 10;
-              spelerY= 640
-          }, 500);
-      }
-  
-     
-      
-  }
-    
-
- 
-
-
-  
-
-
- 
-
-    
-
- if (keyIsDown(SHIFT)) {
-    if (keyIsDown (ARROW_LEFT)) {
-      spelerX = spelerX +14;
-    }
-    else if (keyIsDown(ARROW_RIGHT)) {
-      spelerX = spelerX -14;
+    if (keyIsDown(ARROW_RIGHT)) {
+        spelerY -= 30;
+        setTimeout(() => {
+            MoveTo(640, 30);
+        }, 600);
+    } else {
+        spelerY -= 30;
+        setTimeout(() => {
+            MoveTo(640, 30);
+        }, 600);
     }
   }
 
-  fill('blue');
-  rect(0, 0, 1280, 720);
+ function MoveTo(targetY, increment) {
+    if (spelerY < targetY) {
+        spelerY += increment;
+        setTimeout(() => {
+            MoveTo(targetY, increment);
+        }, 2000); 
+    }
+  }
+    
+ 
+   
+
+
+ fill('blue');
+ rect(0, 0, 1280, 720);
 
   // vijand
 
   // kogel
-}
-
+}     
 /**
  * Checkt botsingen
  * Verwijdert neergeschoten dingen
@@ -122,20 +119,19 @@ var verwerkBotsing = function() {
   // botsing kogel tegen vijand
 
   // update punten en health
-
 };
-
-/**
+ /**
  * Tekent spelscherm
  */
 var tekenAlles = function() {
 
   // achtergrond
 
-  image(img7,  50, 380, 400,500);
+  image(img7,  50, 540, 200,150);
   
   fill('black');
   rect(0, 670, 1280, 50);
+  
 
   // vijand
 
@@ -143,7 +139,8 @@ var tekenAlles = function() {
 
   // speler
 
-image(spelerImg, spelerX-50, spelerY-50, 100, 100);
+
+ image(spelerImg, spelerX-50, spelerY-50, 100, 100);
 
   // punten en health
 
@@ -173,7 +170,7 @@ function preload() {
   img4 = loadImage('afbeeldingen/astro-4.png');
   img5 = loadImage('afbeeldingen/astro-5.png');
   img6 = loadImage('afbeeldingen/astro-6.png');
-  img7 = loadImage('afbeeldingen/House-lvl1.png');
+  img7 = loadImage('afbeeldingen/huis1.png');
   spelerImg = img1;
 }
 
