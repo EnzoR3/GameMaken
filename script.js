@@ -1,4 +1,3 @@
-
 /* Game opdracht
    Informatica - Emmauscollege Rotterdam
    Template voor een game in JavaScript met de p5 library
@@ -32,18 +31,24 @@ var img4;
 var img5;
 var img6;
 
-//plaatje voor het huis
+var spelerImg;
+
+//het huis
 var img7;
+const houseX = 50;
+const houseY = 540;
 
 // plaatjes voor inventory en items in inventory
-var Inventory;
+var inventoryOpened = 0;
+var inventoryImg;
+var img8;
 
-//welk plaatje je laadt voor de speler
-var spelerImg;
 //de grond
 var grond = 640;
+
 // hoe lang je mag jumpen
-var jumpTime = 50;
+var jumping = false;
+
 // de keys die je indrukt met keycode
 const ARROW_LEFT = 39;
 const ARROW_RIGHT = 37;
@@ -85,9 +90,15 @@ var beweegAlles = function() {
       spelerX = spelerX -6;
     }
   }
+
+  if (keyIsDown(SPACE) && !jumping) {
+    jumping = true;
+    spelerY = spelerY - 60;
+    setTimeout(() => { spelerY = grond; jumping = false; }, 500);
+  }
   
 
-  if (keyIsDown(SPACE)) {   
+  /*if (keyIsDown(SPACE)) {   
     setTimeout(() => jumpTime = jumpTime -5, 50);
     spelerY = grond -100;
     setTimeout(() => spelerY = grond, 500);
@@ -111,22 +122,20 @@ var beweegAlles = function() {
       jumpTime = 50;
     }
   
-  if (spelerY < grond) {
+    if (spelerY < grond) {
     setTimeout (() => spelerY = grond, 400);
   }
-}
+};*/
+
+
   // hier maken we de achtergrond zodat we geen streep krijgen
-fill('blue');
+ fill('blue');
  rect(0, 0, 1280, 720);
 
- // hier zorgen we dat de inventaris kan worden geopend
- if (keyIsDown(I)) {
-  
- }
   // vijand
 
   // kogel
-}     
+};     
 /**
  * Checkt botsingen
  * Verwijdert neergeschoten dingen
@@ -135,9 +144,16 @@ fill('blue');
 var verwerkBotsing = function() {
   // botsing speler tegen vijand
 
-  // botsing kogel tegen vijand
+  // botsing kogel tegen vijand of speler
 
   // update punten en health
+
+  // collision met het huis
+
+  if (spelerX - houseX < 200) {
+    fill('green');
+    rect(0, 0, 1280, 720);
+  }
 };
  /**
  * Tekent spelscherm
@@ -146,7 +162,7 @@ var tekenAlles = function() {
 
   // achtergrond
 
-  image(img7,  50, 540, 200,150);
+  image(img7,  houseX, houseY, 200, 150);
   
   fill('black');
   rect(0, 670, 1280, 50);
@@ -158,10 +174,26 @@ var tekenAlles = function() {
 
   // speler
 
-
  image(spelerImg, spelerX-50, spelerY-50, 100, 100);
 
   // punten en health
+
+  //inventaris
+ if (keyIsDown(I)) {
+
+  image(inventoryImg, 10, 10, 1200, 600);
+  if (inventoryOpened === 1) {
+    inventoryOpened = 0;
+  }
+
+  if (inventoryOpened === 0) {
+    inventoryOpened = 1; 
+  }
+ }
+
+ if (inventoryOpened === 1) {
+  image(inventoryImg, 10, 10, 1200, 600);
+ }
 
 };
 
@@ -189,8 +221,10 @@ function preload() {
   img4 = loadImage('afbeeldingen/astro-4.png');
   img5 = loadImage('afbeeldingen/astro-5.png');
   img6 = loadImage('afbeeldingen/astro-6.png');
-  img7 = loadImage('afbeeldingen/huis1.png');
+  img7 = loadImage('afbeeldingen/huis.png');
+  img8 = loadImage('afbeeldingen/inventory.png');
   spelerImg = img1;
+  inventoryImg = img8;
 }
 
 
@@ -204,7 +238,7 @@ function setup() {
   createCanvas(1280, 720);
 
   // Kleur de achtergrond blauw, zodat je het kunt zien
-  background('blue');
+ // background('blue');
 }
 /**
  * draw
