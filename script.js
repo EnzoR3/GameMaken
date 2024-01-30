@@ -30,10 +30,13 @@ var img3;
 var img4;
 var img5;
 var img6;
-
 var img7;
 
 var spelerImg;
+
+var grond = 640;
+
+var jumpTime = 50;
 
 const ARROW_LEFT = 39;
 const ARROW_RIGHT = 37;
@@ -42,7 +45,6 @@ const ARROW_DOWN = 40;
 const SHIFT = 16;
 
 const SPACE = 32;
-
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -55,12 +57,12 @@ var beweegAlles = function() {
  
   // speler
   if(keyIsDown(ARROW_LEFT)) {
-    spelerX = spelerX +13;
+    spelerX = spelerX +5;
     spelerImg = img1;
   }
 
   if (keyIsDown(ARROW_RIGHT)) {
-    spelerX = spelerX -13;
+    spelerX = spelerX -5;
     spelerImg = img3;
   }
 
@@ -73,43 +75,42 @@ var beweegAlles = function() {
       spelerX = spelerX -6;
     }
   }
-
-  const grond = 640;
   
-  function MoveTo(targetY, increment) {
-    while (spelerY < targetY) {
-      spelerY += increment;
 
-        if (spelerY > grond) {
-            setTimeout (() => {
-            spelerY = grond;
-            }, 300);
-            
-        }
-         
-      }
-  }
-  if (keyIsDown(SPACE)) {
-     spelerY -= 20;
-     
-     if (spelerY < grond) {
-     setTimeout (() => {
-      MoveTo(grond, 1);
-    }, 250);
+  if (keyIsDown(SPACE)) {   
+    setTimeout(() => jumpTime = jumpTime -5, 50);
+    spelerY = grond -100;
+    setTimeout(() => spelerY = grond, 500);
+  
+
+
+   if (jumpTime > 40 && jumpTime < 50) {
+      spelerY = grond -80;
     }
+    if (jumpTime > 30 && jumpTime < 40) {
+      spelerY = grond -60;
+    }
+    if (jumpTime > 20 && jumpTime < 30) {
+      spelerY = grond -40;
+    }
+    if (jumpTime > 10 && jumpTime < 20) {
+      spelerY = grond -20;
+    }
+    if (jumpTime < 10) {
+      spelerY = grond;
+      jumpTime = 50;
+    }
+  
+  if (spelerY < grond) {
+    setTimeout (() => spelerY = grond, 400);
   }
+
+}
+  
+  //function MoveTo(targetY, increment) {
    
   
-
-  
-
- 
-    
- 
-   
-
-
- fill('blue');
+fill('blue');
  rect(0, 0, 1280, 720);
 
   // vijand
