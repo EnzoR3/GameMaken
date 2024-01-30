@@ -24,27 +24,36 @@ var spelStatus = SPELEN;
 var spelerX = 640; // x-positie van speler
 var spelerY = 640; // y-positie van speler
 
+//plaatjes voor de speler
 var img1;
 var img2;
 var img3;
 var img4;
 var img5;
 var img6;
+
+//plaatje voor het huis
 var img7;
 
+// plaatjes voor inventory en items in inventory
+var Inventory;
+
+//welk plaatje je laadt voor de speler
 var spelerImg;
-
+//de grond
 var grond = 640;
-
+// hoe lang je mag jumpen
 var jumpTime = 50;
-
+// de keys die je indrukt met keycode
 const ARROW_LEFT = 39;
 const ARROW_RIGHT = 37;
 const ARROW_UP = 38;
 const ARROW_DOWN = 40;
 const SHIFT = 16;
-
 const SPACE = 32;
+const A = 65;
+const D = 68;
+const I = 73;
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -55,23 +64,24 @@ const SPACE = 32;
  */
 var beweegAlles = function() {
  
-  // speler
-  if(keyIsDown(ARROW_LEFT)) {
+  // hier bewegen we de speler
+
+  if(keyIsDown(D)) {
     spelerX = spelerX +5;
     spelerImg = img1;
   }
 
-  if (keyIsDown(ARROW_RIGHT)) {
+  if (keyIsDown(A)) {
     spelerX = spelerX -5;
     spelerImg = img3;
   }
 
   if (keyIsDown(SHIFT)) {
-    if (keyIsDown (ARROW_LEFT)) {
+    if (keyIsDown (D)) {
       spelerX = spelerX +6;
     }
     
-    if (keyIsDown(ARROW_RIGHT)) {
+    if (keyIsDown(A)) {
       spelerX = spelerX -6;
     }
   }
@@ -104,15 +114,15 @@ var beweegAlles = function() {
   if (spelerY < grond) {
     setTimeout (() => spelerY = grond, 400);
   }
-
 }
-  
-  //function MoveTo(targetY, increment) {
-   
-  
+  // hier maken we de achtergrond zodat we geen streep krijgen
 fill('blue');
  rect(0, 0, 1280, 720);
 
+ // hier zorgen we dat de inventaris kan worden geopend
+ if (keyIsDown(I)) {
+  
+ }
   // vijand
 
   // kogel
