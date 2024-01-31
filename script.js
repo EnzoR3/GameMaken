@@ -43,6 +43,8 @@ var inventoryOpened = 0;
 var inventoryImg;
 var img8;
 
+// kristal
+var img9;
 //de grond
 var grond = 640;
 

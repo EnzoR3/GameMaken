@@ -1,9 +1,10 @@
 {
-  "name": "Game van David en Enzo",
+  "name": "Space van David en Enzo",
   "short_name": "Space Survival",
   "icons": [{
-    "src": "astro-1.png"
-    
+    "src": "afbeeldingen/astro-1.png",
+    "sizes" : "512x512",
+    "type" : "image/png"
       
     }],
   "start_url": "index.html",
