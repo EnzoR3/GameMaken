@@ -33,7 +33,7 @@ var img6;
 
 var spelerImg;
 
-//het huis
+//het huis met plaatjes en posities
 var img7;
 const houseX = 50;
 const houseY = 540;
@@ -45,6 +45,10 @@ var img8;
 
 // kristal
 var img9;
+var kristalX = 900;
+var kristalShown = 1;
+var kristal = 0;
+
 //de grond
 var grond = 640;
 
@@ -98,37 +102,6 @@ var beweegAlles = function() {
     spelerY = spelerY - 60;
     setTimeout(() => { spelerY = grond; jumping = false; }, 500);
   }
-  
-
-  /*if (keyIsDown(SPACE)) {   
-    setTimeout(() => jumpTime = jumpTime -5, 50);
-    spelerY = grond -100;
-    setTimeout(() => spelerY = grond, 500);
-  
-
-
-   if (jumpTime > 40 && jumpTime < 50) {
-      spelerY = grond -80;
-    }
-    if (jumpTime > 30 && jumpTime < 40) {
-      spelerY = grond -60;
-    }
-    if (jumpTime > 20 && jumpTime < 30) {
-      spelerY = grond -40;
-    }
-    if (jumpTime > 10 && jumpTime < 20) {
-      spelerY = grond -20;
-    }
-    if (jumpTime < 10) {
-      spelerY = grond;
-      jumpTime = 50;
-    }
-  
-    if (spelerY < grond) {
-    setTimeout (() => spelerY = grond, 400);
-  }
-};*/
-
 
   // hier maken we de achtergrond zodat we geen streep krijgen
  fill('blue');
@@ -150,6 +123,8 @@ var verwerkBotsing = function() {
 
   // update punten en health
 
+  // speler tegen item
+
   // collision met het huis
 
   if (spelerX - houseX < 200) {
@@ -169,7 +144,6 @@ var tekenAlles = function() {
   fill('black');
   rect(0, 670, 1280, 50);
   
-
   // vijand
 
   // kogel
@@ -180,24 +154,21 @@ var tekenAlles = function() {
 
   // punten en health
 
-  //inventaris
- if (keyIsDown(I)) {
+  // items om op te pakken
 
-  image(inventoryImg, 10, 10, 1200, 600);
-  if (inventoryOpened === 1) {
-    inventoryOpened = 0;
-  }
-
-  if (inventoryOpened === 0) {
-    inventoryOpened = 1; 
-  }
- }
+    image(img9, kristalX, 620, 75, 75);
+ 
+  // inventaris
 
  if (inventoryOpened === 1) {
   image(inventoryImg, 10, 10, 1200, 600);
+
+ /* if (kristalPickedUp > 0) {
+    image(img9, 15, 15, 75, 75);
+  }*/
  }
 
-};
+}
 
 /**
  * return true als het gameover is
@@ -207,6 +178,16 @@ var checkGameOver = function() {
   // check of HP 0 is , of tijd op is, of ...
   return false;
 };
+
+// Deze functie is nodig voor het laden van plaatjes wanneer je een bepaalde knop indrukt
+
+function keyPressed () {
+  if (key === 'I' || key === 'i') {
+
+    inventoryOpened = 1 - inventoryOpened;
+  }
+}
+  
 
 /* ********************************************* */
 /* setup() en draw() functies / hoofdprogramma   */
@@ -225,6 +206,7 @@ function preload() {
   img6 = loadImage('afbeeldingen/astro-6.png');
   img7 = loadImage('afbeeldingen/huis.png');
   img8 = loadImage('afbeeldingen/inventory.png');
+  img9 = loadImage('afbeeldingen/kristal.png');
   spelerImg = img1;
   inventoryImg = img8;
 }
