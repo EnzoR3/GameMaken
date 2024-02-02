@@ -73,14 +73,35 @@ const I = 73;
 /**
  * Updatet globale variabelen met posities van speler, vijanden en kogels
  */
+
+// Define variables
+
+
 var beweegAlles = function() {
  
   // hier bewegen we de speler
 
-  if(keyIsDown(D)) {
-    spelerX = spelerX +5;
-    spelerImg = img1;
+  let img2;
+  let img4;
+  
+
+  
+    
+    if (keyIsDown(D)) { 
+    
+      spelerX = spelerX +5;
+      animateWalking(); 
+    }
+  
+  
+  function animateWalking() {
+    
+    setInterval(function() {
+      spelerImg = (spelerImg === img2) ? img4 : img2;
+    }, 500);
   }
+  
+ 
 
   if (keyIsDown(A)) {
     spelerX = spelerX -5;
@@ -108,9 +129,9 @@ var beweegAlles = function() {
  rect(0, 0, 1280, 720);
 
   // vijand
-
+}
   // kogel
-};     
+     
 /**
  * Checkt botsingen
  * Verwijdert neergeschoten dingen
@@ -131,7 +152,7 @@ var verwerkBotsing = function() {
     fill('green');
     rect(0, 0, 1280, 720);
   }
-};
+ };
  /**
  * Tekent spelscherm
  */
@@ -198,10 +219,10 @@ en voordat het visuele gedeelte van de game het doet.
 */
 
 function preload() {
-  img1 = loadImage('afbeeldingen/astro-1.png');
-  img2 = loadImage('afbeeldingen/astro-2.png');
-  img3 = loadImage('afbeeldingen/astro-3.png');
-  img4 = loadImage('afbeeldingen/astro-4.png');
+  img1 = loadImage('afbeeldingen/newastro.png');
+  img2 = loadImage('afbeeldingen/loop1r.png');
+  img3 = loadImage('afbeeldingen/newastro2.png');
+  img4 = loadImage('afbeeldingen/loop2r.png');
   img5 = loadImage('afbeeldingen/astro-5.png');
   img6 = loadImage('afbeeldingen/astro-6.png');
   img7 = loadImage('afbeeldingen/huis.png');
