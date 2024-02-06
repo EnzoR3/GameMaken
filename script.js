@@ -45,9 +45,8 @@ var img8;
 
 // kristal
 var img9;
-var kristalX = 900;
-var kristalShown = 1;
-var kristal = 0;
+var lightsaberX = 900;
+var lightsaberShown = 1;
 
 //de grond
 var grond = 640;
@@ -56,15 +55,12 @@ var grond = 640;
 var jumping = false;
 
 // de keys die je indrukt met keycode
-const ARROW_LEFT = 39;
-const ARROW_RIGHT = 37;
-const ARROW_UP = 38;
-const ARROW_DOWN = 40;
 const SHIFT = 16;
 const SPACE = 32;
 const A = 65;
 const D = 68;
 const I = 73;
+const E = 69;
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -80,14 +76,8 @@ const I = 73;
 var beweegAlles = function() {
  
   // hier bewegen we de speler
-
-  let img2;
-  let img4;
-  
-
-  
     
-    if (keyIsDown(D)) { 
+    /*if (keyIsDown(D)) { 
     
       spelerX = spelerX +5;
       animateWalking(); 
@@ -99,13 +89,18 @@ var beweegAlles = function() {
     setInterval(function() {
       spelerImg = (spelerImg === img2) ? img4 : img2;
     }, 500);
-  }
+  }*/
   
  
 
   if (keyIsDown(A)) {
-    spelerX = spelerX -5;
+    spelerX = spelerX -3;
     spelerImg = img3;
+  }
+
+  if (keyIsDown(D)) {
+    spelerX = spelerX +3;
+    spelerImg = img1;
   }
 
   if (keyIsDown(SHIFT)) {
@@ -153,6 +148,16 @@ var verwerkBotsing = function() {
     rect(0, 0, 1280, 720);
   }
  };
+
+var pickupSysteem = function() {
+
+  // oppakken kristal
+  if (spelerX >= kristalX) {
+    if (keyIsDown(E)) {
+    kristalShown = 0;
+  }
+ }
+}
  /**
  * Tekent spelscherm
  */
@@ -176,17 +181,14 @@ var tekenAlles = function() {
   // punten en health
 
   // items om op te pakken
-
+if (kristalShown > 0) {
     image(img9, kristalX, 620, 75, 75);
- 
+}
   // inventaris
 
  if (inventoryOpened === 1) {
   image(inventoryImg, 10, 10, 1200, 600);
 
- /* if (kristalPickedUp > 0) {
-    image(img9, 15, 15, 75, 75);
-  }*/
  }
 
 }
@@ -223,8 +225,8 @@ function preload() {
   img2 = loadImage('afbeeldingen/loop1r.png');
   img3 = loadImage('afbeeldingen/newastro2.png');
   img4 = loadImage('afbeeldingen/loop2r.png');
-  img5 = loadImage('afbeeldingen/astro-5.png');
-  img6 = loadImage('afbeeldingen/astro-6.png');
+  img5 = loadImage('afbeeldingen/loop1l.png');
+  img6 = loadImage('afbeeldingen/loop2l.png');
   img7 = loadImage('afbeeldingen/huis.png');
   img8 = loadImage('afbeeldingen/inventory.png');
   img9 = loadImage('afbeeldingen/kristal.png');
@@ -253,6 +255,7 @@ function setup() {
 function draw() {
   if (spelStatus === SPELEN) {
     beweegAlles();
+    pickupSysteem();
     verwerkBotsing();
     tekenAlles();
     if (checkGameOver()) {
