@@ -76,22 +76,6 @@ const E = 69;
 var beweegAlles = function() {
  
   // hier bewegen we de speler
-    
-    /*if (keyIsDown(D)) { 
-    
-      spelerX = spelerX +5;
-      animateWalking(); 
-    }
-  
-  
-  function animateWalking() {
-    
-    setInterval(function() {
-      spelerImg = (spelerImg === img2) ? img4 : img2;
-    }, 500);
-  }*/
-  
- 
 
   if (keyIsDown(A)) {
     spelerX = spelerX -3;
