@@ -135,10 +135,10 @@ var verwerkBotsing = function() {
 
 var pickupSysteem = function() {
 
-  // oppakken kristal
-  if (spelerX >= kristalX) {
+  // oppakken lightsaber
+  if (spelerX >= lightsaberX) {
     if (keyIsDown(E)) {
-    kristalShown = 0;
+    lightsaberShown = 0;
   }
  }
 }
@@ -165,8 +165,8 @@ var tekenAlles = function() {
   // punten en health
 
   // items om op te pakken
-if (kristalShown > 0) {
-    image(img9, kristalX, 620, 75, 75);
+if (lightsaberShown > 0) {
+    image(img9, lightsaberX, 620, 75, 75);
 }
   // inventaris
 
@@ -213,7 +213,7 @@ function preload() {
   img6 = loadImage('afbeeldingen/loop2l.png');
   img7 = loadImage('afbeeldingen/huis.png');
   img8 = loadImage('afbeeldingen/inventory.png');
-  img9 = loadImage('afbeeldingen/kristal.png');
+  img9 = loadImage('afbeeldingen/lightsaber.png');
   spelerImg = img1;
   inventoryImg = img8;
 }
