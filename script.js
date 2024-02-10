@@ -173,6 +173,10 @@ if (lightsaberShown > 0) {
  if (inventoryOpened === 1) {
   image(inventoryImg, 10, 10, 1200, 600);
 
+  if (lightsaberShown < 1) {
+    image(img9, 100, 75, 150, 150);
+  }
+
  }
 
 }
