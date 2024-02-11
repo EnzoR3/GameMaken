@@ -85,6 +85,7 @@ var beweegAlles = function() {
   if (keyIsDown(D)) {
     spelerX = spelerX +3;
     spelerImg = img2;
+    
   }
 
   if (keyIsDown(SHIFT)) {
