@@ -84,7 +84,7 @@ var beweegAlles = function() {
 
   if (keyIsDown(D)) {
     spelerX = spelerX +3;
-    spelerImg = img1;
+    spelerImg = img2;
   }
 
   if (keyIsDown(SHIFT)) {
@@ -209,8 +209,8 @@ en voordat het visuele gedeelte van de game het doet.
 */
 
 function preload() {
-  img1 = loadImage('afbeeldingen/newastro.png');
-  img2 = loadImage('afbeeldingen/loop1r.png');
+  img1 = loadImage('newastro.gif');
+  img2 = loadImage('walk.gif');
   img3 = loadImage('afbeeldingen/newastro2.png');
   img4 = loadImage('afbeeldingen/loop2r.png');
   img5 = loadImage('afbeeldingen/loop1l.png');
