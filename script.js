@@ -30,12 +30,15 @@ var img3;
 var img4;
 var img5;
 var img6;
-var img10;
-var img11;
-var img12;
-var img13;
+var gif1;
+var gif2;
+var gif3;
+var gif4;
+var gif5;
+var gif6;
 
 var spelerImg;
+var animation = 1;
 
 //het huis met plaatjes en posities
 var img7;
@@ -81,55 +84,31 @@ var beweegAlles = function() {
  
   // hier bewegen we de speler
 
- 
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'a' || event.key === 'A') {
-        spelerX = spelerX -= 0.07; 
-        spelerImg = img10; 
-    } 
-     if (event.key === 'd' || event.key === 'D') {
-        spelerX = spelerX += 0.07; 
-        spelerImg = img2; 
-    }
-});
+  if (keyIsDown(A)) {
+    spelerX = spelerX - 3;
+    animation = 2;
+  }
 
-document.addEventListener('keyup', function(event) {
-    if (event.key === 'a' || event.key === 'A' || event.key === 'd' || event.key === 'D') {
-        spelerImg = img5; 
-    }
-});
+  if (keyIsDown(D)) {
+    spelerX = spelerX + 3;
+    animation = 3;
+  }
 
-  if (keyIsDown(SHIFT)) {
+  if (keyIsDown (SHIFT)) {
+    if (keyIsDown (A)) {
+      spelerX = spelerX - 6;
+      animation = 4;
+    }
+
     if (keyIsDown (D)) {
-      spelerX = spelerX +6;
-      
-      if (spelerY ===grond){
-        spelerImg = img4;
-      }
+      spelerX = spelerX + 6;
+      animation = 5;
     }
-    
-    
-    if (keyIsDown(A)) {
-      
-      spelerX = spelerX -6;
-      
-      if (spelerY === grond){
-      spelerImg = img11;
-      
-      
-    }
-    }
-    
   }
 
   if (keyIsDown(SPACE) && !jumping) {
     jumping = true;
     spelerY = spelerY - 60;
-   spelerImg = img12;
-    if (keyIsDown(A)) {
-     spelerImg = img13;
-    }
-   
     setTimeout(() => { spelerY = grond; jumping = false; }, 500);
   }
 
@@ -239,19 +218,21 @@ en voordat het visuele gedeelte van de game het doet.
 */
 
 function preload() {
-  img1 = loadImage('newastro.gif');
-  img2 = loadImage('walkrslow.gif');
+  img1 = loadImage('afbeeldingen/newastro.png');
+  img2 = loadImage('afbeeldingen/loop1r.png');
   img3 = loadImage('afbeeldingen/newastro2.png');
-  img4 = loadImage('walkrfast.gif');
-  img5 = loadImage('newastro2.gif');
-  img6 = loadImage('walklslow.gif');
+  img4 = loadImage('afbeeldingen/loop2r.png');
+  img5 = loadImage('afbeeldingen/loop1l.png');
+  img6 = loadImage('afbeeldingen/loop2l.png');
   img7 = loadImage('afbeeldingen/huis.png');
   img8 = loadImage('afbeeldingen/inventory.png');
   img9 = loadImage('afbeeldingen/lightsaber.png');
-  img10 = loadImage ('walklslow.gif')
-  img11 = loadImage ('walklfast.gif')
-  img12 = loadImage ('jump.png')
-  img13 = loadImage ('jumpleft.png')
+  gif1 = loadImage('gifs/walkrslow.gif');
+  gif2 = loadImage('gifs/walkrfast.gif');
+  gif3 = loadImage('gifs/walklfast.gif');
+  gif4 = loadImage('gifs/walklslow.gif');
+  gif5 = loadImage('gifs/newastro.gif');
+  gif6 = loadImage('gifs/newastro2.gif');
   spelerImg = img1;
   inventoryImg = img8;
 }
