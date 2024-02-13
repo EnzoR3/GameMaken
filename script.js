@@ -42,7 +42,7 @@ var gif6;
 
 var spelerImg;
 
-//het huis met plaatjes en posities
+//het huis met plaatjes en posities ggg
 var img7;
 const houseX = 50;
 const houseY = 540;
