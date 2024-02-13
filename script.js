@@ -20,6 +20,9 @@ const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
+var img12;
+var startscherm;
+
 var spelerX = 640; // x-positie van speler
 var spelerY = 640; // y-positie van speler
 
@@ -41,8 +44,9 @@ var gif5;
 var gif6;
 
 var spelerImg;
+var lastKeyPressed;
 
-//het huis met plaatjes en posities ggg
+//het huis met plaatjes en posities
 var img7;
 const houseX = 50;
 const houseY = 540;
@@ -81,8 +85,13 @@ const E = 69;
 
 // Define variables
 
-
 var beweegAlles = function() {
+
+  // hier maken we het startscherm, dat moet bovenaan de code, vaandaar in deze functie
+
+  if (startscherm = 1) {
+    img(img12, 0, 0, 1280, 720);
+  }
  
   // hier bewegen we de speler
 
@@ -117,6 +126,10 @@ var beweegAlles = function() {
       }
     
     setTimeout(() => { spelerY = grond; jumping = false; spelerImg = gif5; }, 500);
+  }
+
+  if (!keyIsPressed) {
+   spelerImg = gif5;
   }
 
   // hier maken we de achtergrond zodat we geen streep krijgen
@@ -213,6 +226,9 @@ function keyPressed () {
 
     inventoryOpened = 1 - inventoryOpened;
   }
+  if (key === SPACE) {
+    
+  }
 }
   
 
@@ -236,6 +252,8 @@ function preload() {
   img9 = loadImage('afbeeldingen/lightsaber.png');
   img10 = loadImage('afbeeldingen/jump.png');
   img11 = loadImage('afbeeldingen/jumpleft.png');
+  img12 = loadImage('afbeeldingen/startscherm.gif');
+
   gif1 = loadImage('gifs/walkrslow.gif');
   gif2 = loadImage('gifs/walkrfast.gif');
   gif3 = loadImage('gifs/walklfast.gif');
@@ -265,6 +283,7 @@ function setup() {
  * uitgevoerd door de p5 library, nadat de setup functie klaar is
  */
 function draw() {
+
   if (spelStatus === SPELEN) {
     beweegAlles();
     pickupSysteem();
