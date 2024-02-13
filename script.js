@@ -30,6 +30,9 @@ var img3;
 var img4;
 var img5;
 var img6;
+var img10;
+var img11;
+
 var gif1;
 var gif2;
 var gif3;
@@ -38,7 +41,6 @@ var gif5;
 var gif6;
 
 var spelerImg;
-var animation = 1;
 
 //het huis met plaatjes en posities
 var img7;
@@ -84,32 +86,37 @@ var beweegAlles = function() {
  
   // hier bewegen we de speler
 
-  if (keyIsDown(A)) {
+  if (keyIsDown(A) && spelerY === grond) {
     spelerX = spelerX - 3;
-    animation = 2;
+    spelerImg = gif4;
   }
 
-  if (keyIsDown(D)) {
+  if (keyIsDown(D) && spelerY === grond) {
     spelerX = spelerX + 3;
-    animation = 3;
+    spelerImg = gif1;
   }
 
   if (keyIsDown (SHIFT)) {
     if (keyIsDown (A)) {
       spelerX = spelerX - 6;
-      animation = 4;
+      spelerImg = gif3;
     }
 
     if (keyIsDown (D)) {
       spelerX = spelerX + 6;
-      animation = 5;
+      spelerImg = gif2;
     }
   }
 
   if (keyIsDown(SPACE) && !jumping) {
     jumping = true;
+    spelerImg = img10;
     spelerY = spelerY - 60;
-    setTimeout(() => { spelerY = grond; jumping = false; }, 500);
+    if (keyIsDown (A)) {
+      spelerImg = img11;
+      }
+    
+    setTimeout(() => { spelerY = grond; jumping = false; spelerImg = gif5; }, 500);
   }
 
   // hier maken we de achtergrond zodat we geen streep krijgen
@@ -227,13 +234,15 @@ function preload() {
   img7 = loadImage('afbeeldingen/huis.png');
   img8 = loadImage('afbeeldingen/inventory.png');
   img9 = loadImage('afbeeldingen/lightsaber.png');
+  img10 = loadImage('afbeeldingen/jump.png');
+  img11 = loadImage('afbeeldingen/jumpleft.png');
   gif1 = loadImage('gifs/walkrslow.gif');
   gif2 = loadImage('gifs/walkrfast.gif');
   gif3 = loadImage('gifs/walklfast.gif');
   gif4 = loadImage('gifs/walklslow.gif');
   gif5 = loadImage('gifs/newastro.gif');
   gif6 = loadImage('gifs/newastro2.gif');
-  spelerImg = img1;
+  spelerImg = gif5;
   inventoryImg = img8;
 }
 
