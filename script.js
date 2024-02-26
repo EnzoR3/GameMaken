@@ -12,7 +12,6 @@
 ///<reference path="p5.global-mode.d.ts" />
 "use strict"
 
-
 /* ********************************************* */
 /* globale variabelen die je gebruikt in je game */
 /* ********************************************* */
@@ -65,7 +64,7 @@ var lightsaberShown = 1;
 var grond = 640;
 
 // hoe lang je mag jumpen
-var jumping = false;
+var spaceCooldown = false;
 
 // de keys die je indrukt met keycode
 const SHIFT = 16;
@@ -86,13 +85,6 @@ const E = 69;
 // Define variables
 
 var beweegAlles = function() {
-
-  // hier maken we het startscherm, dat moet bovenaan de code, vaandaar in deze functie
-
-  if (startscherm = 1) {
-    img(img12, 0, 0, 1280, 720);
-  }
- 
   // hier bewegen we de speler
 
   if (keyIsDown(A) && spelerY === grond) {
@@ -117,15 +109,19 @@ var beweegAlles = function() {
     }
   }
 
-  if (keyIsDown(SPACE) && !jumping) {
-    jumping = true;
+  if (keyIsDown(SPACE) && !spaceCooldown) {
+    spaceCooldown = true;
     spelerImg = img10;
     spelerY = spelerY - 60;
     if (keyIsDown (A)) {
       spelerImg = img11;
+      spelerX = spelerX -6;
       }
     
-    setTimeout(() => { spelerY = grond; jumping = false; spelerImg = gif5; }, 500);
+    setTimeout(() => {spelerY = grond; spelerImg = gif5;} , 400);
+  }
+  if (!keyIsDown(SPACE)) {
+    spaceCooldown = false;
   }
 
   if (!keyIsPressed) {
