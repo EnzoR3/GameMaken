@@ -19,8 +19,12 @@ const SPELEN = 1;
 const GAMEOVER = 2;
 var spelStatus = SPELEN;
 
-var img12;
-var startscherm;
+// startscherm
+var gif7;
+var gif8;
+var startscherm = true;
+
+//speler
 
 var spelerX = 640; // x-positie van speler
 var spelerY = 640; // y-positie van speler
@@ -78,11 +82,6 @@ const E = 69;
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
 
-/**
- * Updatet globale variabelen met posities van speler, vijanden en kogels
- */
-
-// Define variables
 
 var beweegAlles = function() {
   // hier bewegen we de speler
@@ -120,6 +119,7 @@ var beweegAlles = function() {
     
     setTimeout(() => {spelerY = grond; spelerImg = gif5;} , 400);
   }
+
   if (!keyIsDown(SPACE)) {
     spaceCooldown = false;
   }
@@ -222,8 +222,19 @@ function keyPressed () {
 
     inventoryOpened = 1 - inventoryOpened;
   }
-  if (key === SPACE) {
-    
+  if (startscherm === true) {
+    if (keyCode === SPACE) {
+      setTimeout(() => { startscherm = false; }, 500);
+      }
+    }
+  }
+
+var start = function() {
+  if (startscherm === true) {
+    fill('black');
+    rect(0, 0, 1280, 720);
+    image(gif7, 130, 80, 1000, 600);
+    image(gif8, 300, 400, 600, 400);
   }
 }
   
@@ -248,7 +259,6 @@ function preload() {
   img9 = loadImage('afbeeldingen/lightsaber.png');
   img10 = loadImage('afbeeldingen/jump.png');
   img11 = loadImage('afbeeldingen/jumpleft.png');
-  img12 = loadImage('afbeeldingen/startscherm.gif');
 
   gif1 = loadImage('gifs/walkrslow.gif');
   gif2 = loadImage('gifs/walkrfast.gif');
@@ -256,6 +266,8 @@ function preload() {
   gif4 = loadImage('gifs/walklslow.gif');
   gif5 = loadImage('gifs/newastro.gif');
   gif6 = loadImage('gifs/newastro2.gif');
+  gif7 = loadImage('gifs/startscherm.gif');
+  gif8 = loadImage('gifs/pressspace.gif');
   spelerImg = gif5;
   inventoryImg = img8;
 }
@@ -281,10 +293,13 @@ function setup() {
 function draw() {
 
   if (spelStatus === SPELEN) {
+    if (startscherm === false) {
     beweegAlles();
     pickupSysteem();
     verwerkBotsing();
     tekenAlles();
+    }
+    start();
     if (checkGameOver()) {
       spelStatus = GAMEOVER;
     }
