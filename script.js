@@ -70,7 +70,8 @@ var lightsaberShown = 1;
 //variabelen voor het springen
 var grond = 640;
 var spaceCooldown = false;
-var springSnelheid = 0;
+var springSnelheid = 6;
+var gFactor = 0.2;
 
 // de keys die je indrukt met keycode
 const SHIFT = 16;
@@ -89,36 +90,44 @@ var beweegAlles = function() {
   // hier bewegen we de speler
 
   if (keyIsDown(A) && spelerY === grond) {
-    spelerX = spelerX + 3;
+    spelerX = spelerX - 3;
     spelerImg = gif4;
   }
 
   if (keyIsDown(D) && spelerY === grond) {
-    spelerX = spelerX - 3;
+    spelerX = spelerX + 3;
     spelerImg = gif1;
   }
 
   if (keyIsDown (SHIFT)) {
     if (keyIsDown (A)) {
-      spelerX = spelerX - 6;
+      spelerX = spelerX + 6;
       spelerImg = gif3;
     }
 
     if (keyIsDown (D)) {
-      spelerX += 6;
+      spelerX -= 6;
       spelerImg = gif2;
     }
   }
+
+// SPRINGEN
 
   if (keyIsDown(SPACE) && !spaceCooldown) {
     spaceCooldown = true;
     springSnelheid = 4;
   }
   if (spaceCooldown = true) {
-    spelerY -= springSnelheid;
-    springSnelheid -= 0.2;
+    spelerY = spelerY - springSnelheid;
+    springSnelheid = springSnelheid - gFactor;
   }
-  if (spelerY )
+  if (spelerY > grond) {
+    spaceCooldown = false;
+    spelerY = grond;
+  }
+
+///////////////////////////////
+
 
   if (!keyIsPressed) {
    spelerImg = gif5;
@@ -148,7 +157,7 @@ var verwerkBotsing = function() {
 
   // collision met het huis
 
-  if (Speler.x - houseX < 200) {
+  if (spelerX - houseX < 200) {
     fill('green');
     rect(0, 0, 1280, 720);
   }
@@ -157,7 +166,7 @@ var verwerkBotsing = function() {
 var pickupSysteem = function() {
 
   // oppakken lightsaber
-  if (Speler.x - lightsaberX < 5 && Speler.x > 850) { 
+  if (spelerX - lightsaberX < 5 && spelerX > 850) { 
     if (keyIsDown(E)) {
     lightsaberShown = 0;
   }
@@ -181,7 +190,7 @@ var tekenAlles = function() {
 
   // speler
 
- image(spelerImg, Speler.x-50, Speler.y-50, 100, 100);
+ image(spelerImg, spelerX-50, spelerY-50, 100, 100);
 
   // punten en health
 
