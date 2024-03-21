@@ -26,8 +26,11 @@ var startscherm = true;
 
 //speler
 
-var spelerX = 640; // x-positie van speler
-var spelerY = 640; // y-positie van speler
+/*var spelerX = 640; // x-positie van speler
+var spelerY = 640; // y-positie van speler*/
+
+var spelerY = 640;
+var spelerX = 640;
 
 //plaatjes voor de speler
 var img1;
@@ -64,11 +67,10 @@ var img9;
 var lightsaberX = 900;
 var lightsaberShown = 1;
 
-//de grond
+//variabelen voor het springen
 var grond = 640;
-
-// hoe lang je mag jumpen
 var spaceCooldown = false;
+var springSnelheid = 0;
 
 // de keys die je indrukt met keycode
 const SHIFT = 16;
@@ -87,12 +89,12 @@ var beweegAlles = function() {
   // hier bewegen we de speler
 
   if (keyIsDown(A) && spelerY === grond) {
-    spelerX = spelerX - 3;
+    spelerX = spelerX + 3;
     spelerImg = gif4;
   }
 
   if (keyIsDown(D) && spelerY === grond) {
-    spelerX = spelerX + 3;
+    spelerX = spelerX - 3;
     spelerImg = gif1;
   }
 
@@ -103,26 +105,20 @@ var beweegAlles = function() {
     }
 
     if (keyIsDown (D)) {
-      spelerX = spelerX + 6;
+      spelerX += 6;
       spelerImg = gif2;
     }
   }
 
   if (keyIsDown(SPACE) && !spaceCooldown) {
     spaceCooldown = true;
-    spelerImg = img10;
-    spelerY = spelerY - 60;
-    if (keyIsDown (A)) {
-      spelerImg = img11;
-      spelerX = spelerX -6;
-      }
-    
-    setTimeout(() => {spelerY = grond; spelerImg = gif5;} , 400);
+    springSnelheid = 4;
   }
-
-  if (!keyIsDown(SPACE)) {
-    spaceCooldown = false;
+  if (spaceCooldown = true) {
+    spelerY -= springSnelheid;
+    springSnelheid -= 0.2;
   }
+  if (spelerY )
 
   if (!keyIsPressed) {
    spelerImg = gif5;
@@ -152,7 +148,7 @@ var verwerkBotsing = function() {
 
   // collision met het huis
 
-  if (spelerX - houseX < 200) {
+  if (Speler.x - houseX < 200) {
     fill('green');
     rect(0, 0, 1280, 720);
   }
@@ -161,7 +157,7 @@ var verwerkBotsing = function() {
 var pickupSysteem = function() {
 
   // oppakken lightsaber
-  if (spelerX >= lightsaberX) {
+  if (Speler.x - lightsaberX < 5 && Speler.x > 850) { 
     if (keyIsDown(E)) {
     lightsaberShown = 0;
   }
@@ -185,7 +181,7 @@ var tekenAlles = function() {
 
   // speler
 
- image(spelerImg, spelerX-50, spelerY-50, 100, 100);
+ image(spelerImg, Speler.x-50, Speler.y-50, 100, 100);
 
   // punten en health
 
