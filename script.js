@@ -41,6 +41,7 @@ var img5;
 var img6;
 var img10;
 var img11;
+var img12;
 
 var gif1;
 var gif2;
@@ -181,8 +182,8 @@ var tekenAlles = function() {
 
   image(img7,  houseX, houseY, 200, 150);
   
-  fill('black');
-  rect(0, 670, 1280, 50);
+  
+  image(img12, 0,670, 1280, 50);
   
   // vijand
 
@@ -264,6 +265,7 @@ function preload() {
   img9 = loadImage('afbeeldingen/lightsaber.png');
   img10 = loadImage('afbeeldingen/jump.png');
   img11 = loadImage('afbeeldingen/jumpleft.png');
+  img12 = loadImage('afbeeldingen/grond.png');
 
   gif1 = loadImage('gifs/walkrslow.gif');
   gif2 = loadImage('gifs/walkrfast.gif');
