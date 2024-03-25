@@ -183,7 +183,7 @@ var tekenAlles = function() {
   image(img7,  houseX, houseY, 200, 150);
   
   
-  image(img12, 0,670, 1280, 50);
+  image(img12, 0,580, 1280, 110);
   
   // vijand
 
