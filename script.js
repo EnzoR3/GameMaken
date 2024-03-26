@@ -71,8 +71,8 @@ var lightsaberShown = 1;
 //variabelen voor het springen
 var grond = 640;
 var spaceCooldown = false;
-var springSnelheid = 6;
-var gFactor = 0.2;
+var springSnelheid = 8;
+var gFactor = 0.4;
 
 // de keys die je indrukt met keycode
 const SHIFT = 16;
@@ -90,33 +90,36 @@ const E = 69;
 var beweegAlles = function() {
   // hier bewegen we de speler
 
-  if (keyIsDown(A) && spelerY === grond) {
+  if (keyIsDown(A) ) {
     spelerX = spelerX - 3;
     spelerImg = gif4;
   }
-
-  if (keyIsDown(D) && spelerY === grond) {
+  
+    
+  if (keyIsDown(D) ) {
     spelerX = spelerX + 3;
     spelerImg = gif1;
   }
 
   if (keyIsDown (SHIFT)) {
-    if (keyIsDown (A)) {
+    if (keyIsDown (D)) {
       spelerX = spelerX + 6;
       spelerImg = gif2;
     }
 
-    if (keyIsDown (D)) {
+    if (keyIsDown (A)) {
       spelerX -= 6;
       spelerImg = gif3;
     }
+
   }
+
 
 // SPRINGEN
 
   if (keyIsDown(SPACE) && !spaceCooldown) {
     spaceCooldown = true;
-    springSnelheid = 4;
+    springSnelheid = 8;
   }
   if (spaceCooldown = true) {
     spelerY = spelerY - springSnelheid;
@@ -130,9 +133,7 @@ var beweegAlles = function() {
 ///////////////////////////////
 
 
-  if (!keyIsPressed) {
-   spelerImg = gif5;
-  }
+  
 
   // hier maken we de achtergrond zodat we geen streep krijgen
  fill('blue');
