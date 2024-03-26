@@ -103,12 +103,12 @@ var beweegAlles = function() {
   if (keyIsDown (SHIFT)) {
     if (keyIsDown (A)) {
       spelerX = spelerX + 6;
-      spelerImg = gif3;
+      spelerImg = gif2;
     }
 
     if (keyIsDown (D)) {
       spelerX -= 6;
-      spelerImg = gif2;
+      spelerImg = gif3;
     }
   }
 
