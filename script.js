@@ -92,26 +92,20 @@ var beweegAlles = function() {
 
   if (keyIsDown(A) ) {
     spelerX = spelerX - 3;
-    spelerImg = gif4;
-  }
-  
-    
-  if (keyIsDown(D) ) {
-    spelerX = spelerX + 3;
-    spelerImg = gif1;
-  }
-
-  if (keyIsDown (SHIFT)) {
-    if (keyIsDown (D)) {
+    if (keyIsDown(SHIFT)) {
+      spelerImg = gif3;
+      spelerX -= 6;
+    } else { spelerImg = gif4; }
+  } else if (keyIsDown (D)) {
+    if (keyIsDown(SHIFT)) {
       spelerX = spelerX + 6;
       spelerImg = gif2;
-    }
-
-    if (keyIsDown (A)) {
-      spelerX -= 6;
-      spelerImg = gif3;
-    }
-
+    } else { 
+      spelerImg = gif1; 
+      spelerX = spelerX + 3;
+     }
+  } else {
+    spelerImg = gif5;
   }
 
 
@@ -121,27 +115,22 @@ var beweegAlles = function() {
     spaceCooldown = true;
     springSnelheid = 8;
   }
+  
   if (spaceCooldown = true) {
     spelerY = spelerY - springSnelheid;
     springSnelheid = springSnelheid - gFactor;
   }
+  
   if (spelerY > grond) {
     spaceCooldown = false;
     spelerY = grond;
   }
 
-///////////////////////////////
-
-
-  
-
   // hier maken we de achtergrond zodat we geen streep krijgen
  fill('blue');
  rect(0, 0, 1280, 720);
 
-  // vijand
 }
-  // kogel
      
 /**
  * Checkt botsingen
@@ -235,6 +224,7 @@ function keyPressed () {
       }
     }
   }
+
 
 var start = function() {
   if (startscherm === true) {
