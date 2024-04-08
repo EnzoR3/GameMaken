@@ -32,7 +32,7 @@ var spelerY = 640; // y-positie van speler*/
 var spelerY = 640;
 var spelerX = 640;
 
-//plaatjes voor de speler
+//plaatjes 
 var img1;
 var img2;
 var img3;
@@ -42,6 +42,7 @@ var img6;
 var img10;
 var img11;
 var img12;
+var img13;
 
 var gif1;
 var gif2;
@@ -51,7 +52,7 @@ var gif5;
 var gif6;
 
 var spelerImg;
-var lastKeyPressed;
+var spelerFacing = 'rechts';
 
 //het huis met plaatjes en posities
 var img7;
@@ -82,6 +83,12 @@ const D = 68;
 const I = 73;
 const E = 69;
 
+// of je de KeyBinds ka zien of niet
+var tipsShown = 1;
+
+// Canvas Update
+var canvasStatus = 1;
+
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
 /* ********************************************* */
@@ -91,24 +98,26 @@ var beweegAlles = function() {
   // hier bewegen we de speler
 
   if (keyIsDown(A) ) {
+    spelerImg = gif4;
     spelerX = spelerX - 3;
+    spelerFacing = 'links';
     if (keyIsDown(SHIFT)) {
       spelerImg = gif3;
-      spelerX -= 6;
-    } else { spelerImg = gif4; }
+      spelerX = spelerX -6;
+     }
   } else if (keyIsDown (D)) {
+    spelerImg = gif1; 
+    spelerX = spelerX + 3;
+    spelerFacing = 'rechts';
     if (keyIsDown(SHIFT)) {
       spelerX = spelerX + 6;
       spelerImg = gif2;
-    } else { 
-      spelerImg = gif1; 
-      spelerX = spelerX + 3;
-     }
+    }
   } else {
-    spelerImg = gif5;
+    if (spelerFacing === 'rechts'){
+      spelerImg = gif5;
+    } else { spelerImg = gif6; }
   }
-
-
 // SPRINGEN
 
   if (keyIsDown(SPACE) && !spaceCooldown) {
@@ -138,28 +147,25 @@ var beweegAlles = function() {
  * Updatet globale variabelen punten en health
  */
 var verwerkBotsing = function() {
-  // botsing speler tegen vijand
 
-  // botsing kogel tegen vijand of speler
-
-  // update punten en health
-
-  // speler tegen item
-
-  // collision met het huis
-
-  if (spelerX - houseX < 200) {
-    fill('green');
-    rect(0, 0, 1280, 720);
+  if (spelerX > 1275) { 
+    spelerX = 40;
+    canvasStatus++;
+   }
+  if (spelerX <10) {
+    spelerX = 1260;
+    canvasStatus--;
   }
+
+
  };
 
 var pickupSysteem = function() {
 
   // oppakken lightsaber
-  if (spelerX - lightsaberX < 5 && spelerX > 850) { 
+  if (spelerX < 950 && spelerX > 850 && spelerY === grond) { 
     if (keyIsDown(E)) {
-    lightsaberShown = 0;
+    lightsaberShown--;
   }
  }
 }
@@ -168,22 +174,29 @@ var pickupSysteem = function() {
  */
 var tekenAlles = function() {
 
-  // achtergrond
+  // achtergrond bij canvas 1
+  if (canvasStatus < 2) {
+    image(img7,  houseX, houseY, 200, 150);
+  }
+  if (canvasStatus > 2) {
+    image(img13, miniGolemX, 640, 50, 50);
+  } 
+  
+  fill('black');
+  rect(0, 670, 1280, 80);
 
-  image(img7,  houseX, houseY, 200, 150);
-  
-  
-  image(img12, 0,580, 1280, 110);
-  
-  // vijand
-
-  // kogel
+  // KeyBind tips
+  if (tipsShown > 0) {
+  text("press Q to hide this tab use A and D to move", 50, 50);
+  text("use A and D to move", 50, 80);
+  text("press SPACE to jump", 50, 110);
+  text("press E to pick items up and I to open inventory", 50, 140);
+  textSize(20);
+  }
 
   // speler
 
  image(spelerImg, spelerX-50, spelerY-50, 100, 100);
-
-  // punten en health
 
   // items om op te pakken
 if (lightsaberShown > 0) {
@@ -197,9 +210,12 @@ if (lightsaberShown > 0) {
   if (lightsaberShown < 1) {
     image(img9, 100, 75, 150, 150);
   }
-
  }
 
+
+ if (lightsaberShown < 1) {
+    image(img9, spelerX+12, spelerY-20, 50, 50);
+  }
 }
 
 /**
@@ -223,9 +239,12 @@ function keyPressed () {
       setTimeout(() => { startscherm = false; }, 500);
       }
     }
+    
+    if (key === 'Q' || key === 'q') {
+      tipsShown = 1 -  tipsShown;
+    }
+
   }
-
-
 var start = function() {
   if (startscherm === true) {
     fill('black');
@@ -257,6 +276,7 @@ function preload() {
   img10 = loadImage('afbeeldingen/jump.png');
   img11 = loadImage('afbeeldingen/jumpleft.png');
   img12 = loadImage('afbeeldingen/grond.png');
+  img13 = loadImage('afbeeldingen/minigolem.png');
 
   gif1 = loadImage('gifs/walkrslow.gif');
   gif2 = loadImage('gifs/walkrfast.gif');
