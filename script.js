@@ -123,6 +123,8 @@ var beweegAlles = function() {
   if (keyIsDown(SPACE) && !spaceCooldown) {
     spaceCooldown = true;
     springSnelheid = 8;
+    if (spelerFacing === 'rechts') { spelerImg = img10; }
+    if (spelerFacing === 'links') { spelerImg = img11; }
   }
   
   if (spaceCooldown = true) {
@@ -152,13 +154,17 @@ var verwerkBotsing = function() {
     spelerX = 40;
     canvasStatus++;
    }
-  if (spelerX <10) {
+   
+  if (spelerX <10 && canvasStatus !== 1) {
     spelerX = 1260;
     canvasStatus--;
   }
 
-
  };
+
+ if (spelerX < 10 && canvasStatus === 1) {
+  spelerX = 10;
+ }
 
 var pickupSysteem = function() {
 
@@ -178,16 +184,21 @@ var tekenAlles = function() {
   if (canvasStatus < 2) {
     image(img7,  houseX, houseY, 200, 150);
   }
-  if (canvasStatus > 2) {
-    image(img13, miniGolemX, 640, 50, 50);
-  } 
+
+  // achtergrond bij canvas 2
+  if (canvasStatus === 2) {
+    image(img12, 640, 570, 100, 50);
+  }
+  if (canvasStatus === 2 && spelerX > 600 && spelerX < 750) {
+    grond = 570;
+  } else { grond = 640}
   
   fill('black');
   rect(0, 670, 1280, 80);
 
   // KeyBind tips
   if (tipsShown > 0) {
-  text("press Q to hide this tab use A and D to move", 50, 50);
+  text("press Q to hide this tab ", 50, 50);
   text("use A and D to move", 50, 80);
   text("press SPACE to jump", 50, 110);
   text("press E to pick items up and I to open inventory", 50, 140);
@@ -199,7 +210,7 @@ var tekenAlles = function() {
  image(spelerImg, spelerX-50, spelerY-50, 100, 100);
 
   // items om op te pakken
-if (lightsaberShown > 0) {
+if (lightsaberShown > 0 && canvasStatus === 1) {
     image(img9, lightsaberX, 620, 75, 75);
 }
   // inventaris
@@ -211,13 +222,7 @@ if (lightsaberShown > 0) {
     image(img9, 100, 75, 150, 150);
   }
  }
-
-
- if (lightsaberShown < 1) {
-    image(img9, spelerX+12, spelerY-20, 50, 50);
-  }
 }
-
 /**
  * return true als het gameover is
  * anders return false
@@ -275,7 +280,7 @@ function preload() {
   img9 = loadImage('afbeeldingen/lightsaber.png');
   img10 = loadImage('afbeeldingen/jump.png');
   img11 = loadImage('afbeeldingen/jumpleft.png');
-  img12 = loadImage('afbeeldingen/grond.png');
+  img12 = loadImage('afbeeldingen/platform.png');
   img13 = loadImage('afbeeldingen/minigolem.png');
 
   gif1 = loadImage('gifs/walkrslow.gif');
