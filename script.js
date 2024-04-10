@@ -183,23 +183,28 @@ var tekenAlles = function() {
   if (canvasStatus < 2) {
     image(img7,  houseX, houseY, 200, 150);
   }
-
+  fill('black');
+  rect(0, 670, 1280, 80);
 
   // achtergrond bij canvas 2
 
   // Platform
   if (canvasStatus === 2) {
-    image(img12, 640, 480, 150, 100);
-    image (gif9, 640,520,107,200);
+    //lava
+    image (gif9, 130,530,550,190);
+    image (gif9, 500,530,550,190);
+    image (gif9, 800,530,550,190);
+    //platorm
+    image(img12, 330, 480, 180, 100);
+    image(img12, 630, 480, 180, 100);
   }
 
  // kijken of er een platform is om op te springen, zo ja dan landt hij daar
-  if (canvasStatus === 2 && spelerX > 640 && spelerX < 800 && spelerY < 600) {
-    grond = 570;
+  if (canvasStatus === 2 && spelerX > 640 && spelerX < 800 && spelerY < 440) {
+    grond = 450;
   } else { grond = 640}
   
-  fill('black');
-  rect(0, 670, 1280, 80);
+
 
   // KeyBind tips
   if (tipsShown > 0) {
