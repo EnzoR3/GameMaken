@@ -25,12 +25,10 @@ var gif8;
 var startscherm = true;
 
 //speler
-
-/*var spelerX = 640; // x-positie van speler
-var spelerY = 640; // y-positie van speler*/
-
 var spelerY = 640;
 var spelerX = 640;
+
+var health = 10;
 
 //plaatjes 
 var img1;
@@ -84,7 +82,7 @@ const D = 68;
 const I = 73;
 const E = 69;
 
-// of je de KeyBinds ka zien of niet
+// of je de KeyBinds kan zien of niet
 var tipsShown = 1;
 
 // Canvas Update
@@ -199,13 +197,6 @@ var tekenAlles = function() {
     image(img12, 630, 480, 180, 100);
   }
 
- // kijken of er een platform is om op te springen, zo ja dan landt hij daar
-  if (canvasStatus === 2 && spelerX > 640 && spelerX < 800 && spelerY < 440) {
-    grond = 450;
-  } else { grond = 640}
-  
-
-
   // KeyBind tips
   if (tipsShown > 0) {
   text("press Q to hide this tab ", 50, 50);
@@ -215,6 +206,9 @@ var tekenAlles = function() {
   textSize(20);
   }
 
+  text(spelerX, 50, 50);
+  text(spelerY, 50, 80);
+  textSize(20);
   // speler
 
  image(spelerImg, spelerX-50, spelerY-50, 100, 100);
@@ -334,12 +328,15 @@ function draw() {
     tekenAlles();
     }
     start();
-    if (checkGameOver()) {
+    if (health <= 0) {
       spelStatus = GAMEOVER;
     }
   }
   if (spelStatus === GAMEOVER) {
-    // teken game-over scherm
+    fill('red');
+    rect(0, 0, 1280, 720);
+    text("GAME OVER", 640, 400);
+    textSize(50);
 
   }
 }
