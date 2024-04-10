@@ -6,6 +6,8 @@
    voeg er je eigen code aan toe.
  */
 
+   // hALLO
+
 /*
  * instellingen om foutcontrole van je code beter te maken 
  */
