@@ -6,8 +6,6 @@
    voeg er je eigen code aan toe.
  */
 
-   // hALLO
-
 /*
  * instellingen om foutcontrole van je code beter te maken 
  */
@@ -52,6 +50,7 @@ var gif3;
 var gif4;
 var gif5;
 var gif6;
+var gif9;
 
 var spelerImg;
 var spelerFacing = 'rechts';
@@ -124,9 +123,7 @@ var beweegAlles = function() {
 
   if (keyIsDown(SPACE) && !spaceCooldown) {
     spaceCooldown = true;
-    springSnelheid = 8;
-    if (spelerFacing === 'rechts') { spelerImg = img10; }
-    if (spelerFacing === 'links') { spelerImg = img11; }
+    springSnelheid = 10;
   }
   
   if (spaceCooldown = true) {
@@ -141,7 +138,7 @@ var beweegAlles = function() {
 
   // hier maken we de achtergrond zodat we geen streep krijgen
  fill('blue');
- rect(0, 0, 1280, 720);
+ rect(0, 0, 3000, 2500);
 
 }
      
@@ -171,7 +168,7 @@ var verwerkBotsing = function() {
 var pickupSysteem = function() {
 
   // oppakken lightsaber
-  if (spelerX < 950 && spelerX > 850 && spelerY === grond) { 
+  if (spelerX > 750 && spelerX < 1200 && spelerY === grond) { 
     if (keyIsDown(E)) {
     lightsaberShown--;
   }
@@ -187,11 +184,17 @@ var tekenAlles = function() {
     image(img7,  houseX, houseY, 200, 150);
   }
 
+
   // achtergrond bij canvas 2
+
+  // Platform
   if (canvasStatus === 2) {
-    image(img12, 640, 570, 100, 50);
+    image(img12, 640, 480, 150, 100);
+    image (gif9, 640,520,107,200);
   }
-  if (canvasStatus === 2 && spelerX > 600 && spelerX < 750) {
+
+ // kijken of er een platform is om op te springen, zo ja dan landt hij daar
+  if (canvasStatus === 2 && spelerX > 640 && spelerX < 800 && spelerY < 600) {
     grond = 570;
   } else { grond = 640}
   
@@ -293,6 +296,7 @@ function preload() {
   gif6 = loadImage('gifs/newastro2.gif');
   gif7 = loadImage('gifs/startscherm.gif');
   gif8 = loadImage('gifs/pressspace.gif');
+  gif9 = loadImage('gifs/lava.gif');
   spelerImg = gif5;
   inventoryImg = img8;
 }
