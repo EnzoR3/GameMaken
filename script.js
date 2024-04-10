@@ -159,12 +159,12 @@ var verwerkBotsing = function() {
     spelerX = 1260;
     canvasStatus--;
   }
-
+  if (spelerX < 10 && canvasStatus === 1) {
+    spelerX = 10;
+   }
  };
 
- if (spelerX < 10 && canvasStatus === 1) {
-  spelerX = 10;
- }
+ 
 
 var pickupSysteem = function() {
 
