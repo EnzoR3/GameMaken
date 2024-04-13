@@ -17,7 +17,7 @@
 /* ********************************************* */
 const SPELEN = 1;
 const GAMEOVER = 2;
-var spelStatus = SPELEN;
+var spelStatus = GAMEOVER;
 
 // startscherm
 var gif7;
@@ -27,8 +27,6 @@ var startscherm = true;
 //speler
 var spelerY = 640;
 var spelerX = 640;
-
-var health = 10;
 
 //plaatjes 
 var img1;
@@ -87,6 +85,8 @@ var tipsShown = 1;
 
 // Canvas Update
 var canvasStatus = 1;
+
+var health = 5;
 
 /* ********************************************* */
 /* functies die je gebruikt in je game           */
@@ -159,9 +159,15 @@ var verwerkBotsing = function() {
   if (spelerX < 10 && canvasStatus === 1) {
     spelerX = 10;
    }
+
+   if (spelerX > 300 && spelerX < 530 && spelerY < 535) {
+      grond = 530;
+    } else if (spelerX > 610 && spelerX < 830 && spelerY < 451) {
+       grond = 450; 
+   }else { grond = 640; }
+       
  };
 
- 
 
 var pickupSysteem = function() {
 
@@ -186,15 +192,21 @@ var tekenAlles = function() {
 
   // achtergrond bij canvas 2
 
-  // Platform
   if (canvasStatus === 2) {
+
     //lava
     image (gif9, 130,530,550,190);
     image (gif9, 500,530,550,190);
     image (gif9, 800,530,550,190);
-    //platorm
+
+    //platormen
     image(img12, 330, 480, 180, 100);
-    image(img12, 630, 480, 180, 100);
+    image(img12, 630, 400, 180, 100);
+
+    if (spelerX > 200 && spelerY === 640) {
+      health = 0;
+     }
+
   }
 
   // KeyBind tips
@@ -203,12 +215,15 @@ var tekenAlles = function() {
   text("use A and D to move", 50, 80);
   text("press SPACE to jump", 50, 110);
   text("press E to pick items up and I to open inventory", 50, 140);
+  text("hold SHIFT to sprint twice as fast!", 50, 170);
   textSize(20);
   }
 
   text(spelerX, 50, 50);
   text(spelerY, 50, 80);
   textSize(20);
+
+
   // speler
 
  image(spelerImg, spelerX-50, spelerY-50, 100, 100);
@@ -226,6 +241,31 @@ if (lightsaberShown > 0 && canvasStatus === 1) {
     image(img9, 100, 75, 150, 150);
   }
  }
+
+
+
+ if (health > 4) {
+  fill('red');
+  rect(1200, 50, 40, 40);
+ }
+ if (health > 3) {
+  fill('red');
+  rect(1150, 50, 40, 40);
+ }
+ if (health > 2) {
+  fill('red');
+  rect(1100, 50, 40, 40);
+ }
+ if (health > 1) {
+  fill('red');
+  rect(1050, 50, 40, 40);
+ } 
+ if (health > 0) {
+  fill('red');
+  rect(1000, 50, 40, 40);
+ }
+
+
 }
 /**
  * return true als het gameover is
@@ -331,10 +371,11 @@ function draw() {
     if (health <= 0) {
       spelStatus = GAMEOVER;
     }
-  }
-  if (spelStatus === GAMEOVER) {
+   }
+   if (spelStatus === GAMEOVER) {
+
     fill('red');
-    rect(0, 0, 1280, 720);
+    rect(0, 0, 3000, 2500);
     text("GAME OVER", 640, 400);
     textSize(50);
 
